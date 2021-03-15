@@ -48,12 +48,19 @@ The output directory must not to exist already, in case it does I simply delete 
 `hdfs dfs -rm -r output`
 
 ## Inspect output
-In order to see the generated out put we have two options:
+In order to see the generated out put I have two options:
 ### 1. Direct inspection
 `hdfs dfs -cat output/*`
 ### 2. First copy to local fs, then inspect
 `hdfs dfs -get output output`      (`hdfs dfs -get <source in hdfs> <target in local fs>`)  
 `cat output/*`
 
+## Inspect the clusters Web UIs
+### namenode
+I just enter [http://localhost:9870](http://localhost:9870) into my browser to see the namenodes web interface.
+There I can see a lot of statistics about the hadoop cluster.
+
+### running jobs
+In order to see the running jobs I enter the hadoop Web UI under [http://localhost:8088/cluster](http://localhost:8088/cluster
 
 
