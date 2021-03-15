@@ -61,6 +61,6 @@ I just enter [http://localhost:9870](http://localhost:9870) into my browser to s
 There I can see a lot of statistics about the hadoop cluster.
 
 ### running jobs
-In order to see the running jobs I enter the hadoop Web UI under [http://localhost:8088/cluster](http://localhost:8088/cluster
+In order to see the running jobs I enter the hadoop Web UI under [http://localhost:8088/cluster](http://localhost:8088/cluster)
 
 
