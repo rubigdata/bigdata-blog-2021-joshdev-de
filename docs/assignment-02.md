@@ -1,4 +1,6 @@
 # Assignment 02
+
+## Creating Docker container
 In this assignment I use the following docker image:  
 `rubigdata/course:a2`  
 
@@ -12,6 +14,7 @@ To start and attach to the container's CLI I use.
 `docker start hello-hadoop`  
 `docker attach hello-hadoop`
 
+## Initializing hdfs and insert input
 Next I initialize the master node of the hdfs (hadoop filesystem) wich is called namenode using:  
 `hdfs namenode -format`  
 and start the dfs deamons of the datanodes and secondary namenodes using:  
@@ -29,9 +32,11 @@ Downloading the example input for this assignment as well as copying it into the
 `hdfs dfs -put 100.txt input`  
 (here the first parameter of `-put` is the source in the local filesystem and the second one is the target in the hdfs)  
 
+## Start job scheduler
 In order to allow scheduling jobs on the hadoop cluster I need yarn (yet another resource negotiator) to do that for me:  
 `start-yarn.sh`  
 
+## Compile and run a program
 Now that I prepared everything I can just copy the .java file I want to use from `/mnt/shared` to `/opt/hadoop` using `cp`. In this case I chose the simple   `WordCount.java example`.  
 
 After that I can continue and compile my first program inside the `/opt/hadoop` directory:  
@@ -41,7 +46,10 @@ After that I can continue and compile my first program inside the `/opt/hadoop` 
 Finally the compiled hadoop program can be run:  
 `hadoop jar wc.jar WordCount input output` (`hadoop jar <jarFileName> <mainClassname> <input dir> <output dir>`  
 The output directory must not to exist already, in case it does I simply delete it using:  
-`hdfs dfs -rm -r output`  
+`hdfs dfs -rm -r output`
+
+## Inspect output
+
 
 
 
