@@ -18,7 +18,7 @@ and start the dfs deamons of the datanodes and secondary namenodes using:
 `start-dfs.sh`
 
 The next step is to create home a home directory for the current user which is hadoop:  
-`hdfs dfs -mkdir -p /user/hadoop`
+`hdfs dfs -mkdir -p /user/hadoop`  
 This home directoy is the working directory of all commands of the style `hdfs dfs -<some fs command>` as well as all hadoop programs executed on the cluster.  
 Many command line tools such as `ls`, `rm`, `cat` and `mkdir` are available here. A full list can be found at [here](https://hadoop.apache.org/docs/r2.4.1/hadoop-project-dist/hadoop-common/FileSystemShell.html).  
 
