@@ -29,7 +29,7 @@ As hadoop programms should be run on some input which is just given by specifyin
 `hdfs dfs -mkdir input`  
 Downloading the example input for this assignment as well as copying it into the hdfs is done using these commands:  
 `wget https://raw.githubusercontent.com/rubigdata-dockerhub/hadoop-dockerfile/master/100.txt`  
-`hdfs dfs -put 100.txt input` (`hdfs dfs -put <source in local fs> <target in hdfs>`)  
+`hdfs dfs -put 100.txt input`      (`hdfs dfs -put <source in local fs> <target in hdfs>`)  
 
 ## Start job scheduler
 In order to allow scheduling jobs on the hadoop cluster I need yarn (yet another resource negotiator) to do that for me:  
@@ -52,7 +52,7 @@ In order to see the generated out put we have two options:
 ### 1. Direct inspection
 `hdfs dfs -cat output/*`
 ### 2. First copy to local fs, then inspect
-`hdfs dfs -get output output` (`hdfs dfs -get <source in hdfs> <target in local fs>`)
+`hdfs dfs -get output output`      (`hdfs dfs -get <source in hdfs> <target in local fs>`)  
 `cat output/*`
 
 
