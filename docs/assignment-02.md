@@ -40,6 +40,9 @@ After that I can continue and compile my first program inside the `/opt/hadoop` 
 
 Finally the compiled hadoop program can be run:  
 `hadoop jar wc.jar WordCount input output` (`hadoop jar <jarFileName> <mainClassname> <input dir> <output dir>`  
-The output directory must not to exist already, in case it does   
+The output directory must not to exist already, in case it does I simply delete it using:  
+`hdfs dfs -rm -r output`  
+
+
 
 
