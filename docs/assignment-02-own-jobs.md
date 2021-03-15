@@ -69,3 +69,5 @@ I get the following output:
 |Romeo appearances| 313|
 |letters|4038816|
 |lines|147838|
+
+So my answer is that Romeo appears more often.
