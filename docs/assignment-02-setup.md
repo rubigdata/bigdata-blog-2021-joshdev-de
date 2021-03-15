@@ -68,6 +68,6 @@ In order to see the running jobs I enter the hadoop Web UI under [http://localho
 ![namenode-ui]
 ![hadoop-ui]
 
-[namenode-ui]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/blob/master/docs/hadoop-ui.png "Namenode UI"
+[namenode-ui]: https://raw.githubusercontent.com/rubigdata/bigdata-blog-2021-joshdev-de/master/docs/namenode_ui.png?token=AMB4WGQGB7AA3M52GKY2IBTALCU6G "Namenode UI"
 [hadoop-ui]: https://raw.githubusercontent.com/rubigdata/bigdata-blog-2021-joshdev-de/master/docs/hadoop-ui.png?token=AMB4WGW3XZUQAE7IIEBYDGTALCU6G "Hadoop UI"
 
