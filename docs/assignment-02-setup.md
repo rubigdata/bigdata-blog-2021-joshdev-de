@@ -38,7 +38,7 @@ In order to allow scheduling jobs on the hadoop cluster I need yarn (yet another
 `start-yarn.sh`  
 
 ## Compile and run a program
-Now that I prepared everything I can just copy the .java file I want to use from `/mnt/shared` to `/opt/hadoop` using `cp`. In this case I chose the simple   `WordCount.java example`.  
+Now that I prepared everything I can just copy the .java file I want to use from `/mnt/shared` to `/opt/hadoop` using `cp`. In this case I chose the simple   `WordCount.java` example.  
 
 After that I can continue and compile my first program inside the `/opt/hadoop` directory:  
 `hadoop com.sun.tools.javac.Main WordCount.java` (compiles the .java files to .class files)  
