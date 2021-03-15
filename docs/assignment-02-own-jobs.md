@@ -61,3 +61,9 @@ Using the following mapper I can count the lines and letters, while also answeri
     }
   }
 ```
+
+I get the following output:  
+`Juliet appearances      204  
+Romeo appearances       313  
+letters 4038816  
+lines   147838`  
