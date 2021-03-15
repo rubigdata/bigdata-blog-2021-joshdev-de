@@ -63,4 +63,11 @@ There I can see a lot of statistics about the hadoop cluster.
 ### running jobs
 In order to see the running jobs I enter the hadoop Web UI under [http://localhost:8088/cluster](http://localhost:8088/cluster)
 
+### examples
+
+![namenode-ui]
+![hadoop-ui]
+
+[namenode-ui]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/blob/master/docs/hadoop-ui.png "Namenode UI"
+[hadoop-ui]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/blob/master/docs/namenode_ui.png "Hadoop UI"
 
