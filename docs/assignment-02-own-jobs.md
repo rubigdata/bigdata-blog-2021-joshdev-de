@@ -1,4 +1,6 @@
-# Assignment 02
+# My Hadoop Jobs
+
+[part 1](https://rubigdata.github.io/bigdata-blog-2021-joshdev-de/assignment-02-setup) of the assignment
 
 ## Creating Docker container
 In this assignment I use the following docker image:  
