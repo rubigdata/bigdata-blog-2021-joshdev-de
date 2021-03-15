@@ -13,7 +13,7 @@ To start and attach to the container's CLI I use.
 `docker attach hello-hadoop`
 
 Next I initialize the master node of the hdfs (hadoop filesystem) wich is called namenode using:  
-`hdfs namenode -format`
+`hdfs namenode -format`  
 and start the dfs deamons of the datanodes and secondary namenodes using:  
 `start-dfs.sh`
 
