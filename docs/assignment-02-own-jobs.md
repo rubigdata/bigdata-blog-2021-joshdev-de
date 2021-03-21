@@ -71,4 +71,6 @@ I get the following output:
 |letters|4038816|
 |lines|147838|
 
-So my answer is that Romeo appears more often.
+So my answer is that Romeo appears more often.  
+
+In the end I must confess that spending the time on normalizing the data maybe was not the best investment here, but it bugged me that the output was not really meaningful. I spent a lot of time debugging some mistakes I made in normalizing the text and in the end I did not have enough time to go ahead and use more advanced map reduce patterns.
