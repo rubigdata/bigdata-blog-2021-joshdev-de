@@ -2,6 +2,8 @@
 
 [part 1](https://rubigdata.github.io/bigdata-blog-2021-joshdev-de/assignment-02-setup) of the assignment
 
+[my code](https://github.com/rubigdata/hello-hadoop-2021-joshdev-de) for this assignment
+
 ## Preprocess text
 When inspecting the results of the WordCount example I noticed that a lot distinct keys are created due to special characters or capitalized letters. In order to tackle that problem I came up with a set of preprocessing functions that remove the special characters and set all letters to lower case.
 
