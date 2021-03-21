@@ -17,6 +17,7 @@ Using the new normalizing step the word count presented in the ouptut is much mo
 ## Fun Facts
 
 Using the following mapper I can count the lines and letters, while also answering the question whether Romeo or Juliet appears more often in the script.
+I just write results for every of the statistics. For every line a write value one with key "lines" and the same holds for "Romeo" and "Juliet". For the characters I just count them and emit the value with key "chars". The reducer then just adds the values and emits the final results.
 
 ```java
   public static class TokenizerMapper
