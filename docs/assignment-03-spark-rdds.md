@@ -15,4 +15,4 @@ I create a file with content "Original", then I define the RDD with the text fil
 ![namenode-ui]
 
 
-[namenode-ui]: images/lazy_evaluation "Namenode UI"
+[namenode-ui]: images/lazy_evaluation.PNG "Namenode UI"
