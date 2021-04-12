@@ -13,10 +13,12 @@ Spark does not recompute everything everytime, if intermediate results were comp
 ![cached]
 
 ## Effect of shuffling and partitions
+Unfortunately I could not test the effects of shuffling and partitions, because no matter how hard I tried I could not get Spark to NOT be efficient.
+I tried using ".map()" instead of ".mapValues()" but Spark carried the partitioner on to the next RDD anyway.
 
 ## How to avoid shuffling
+In order to manage partitions on the other hand there are the functions "repartition(n)" to partition the RDD into n partitions. "coalesce(n)" on the other hand merges every n partitions into one partition.
 
-
-[lazy-eval]: images/lazy_eval.PNG "Lazy Evaluation"
+[lazy-eval]: images/lazy_eval.PNG "Lazy Evaluation"partitioner functions and coalesse
 [uncached]: images/uncached.png "Uncached"
 [cached]:images/cached.png "Cached"
