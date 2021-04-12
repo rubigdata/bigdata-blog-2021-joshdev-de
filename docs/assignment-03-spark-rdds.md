@@ -21,4 +21,4 @@ In order to manage partitions on the other hand there are the functions "reparti
 
 [lazy-eval]: images/lazy_eval.PNG "Lazy Evaluation"partitioner functions and coalesse
 [uncached]: images/uncached.png "Uncached"
-[cached]:images/cached.png "Cached"
+[cached]: images/cached.png "Cached"
