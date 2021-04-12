@@ -17,7 +17,7 @@ Unfortunately I could not test the effects of shuffling and partitions, because 
 I tried using ".map()" instead of ".mapValues()" but Spark carried the partitioner on to the next RDD anyway.
 
 ## How to avoid shuffling
-In order to manage partitions on the other hand there are the functions "repartition(n)" to partition the RDD into n partitions. "coalesce(n)" on the other hand merges every n partitions into one partition.
+In order to manage partitions on the other hand there are the functions "repartition(n)" to partition the RDD into n partitions. "coalesce(n)" on the other hand merges every n partitions into one partition.  
 
 [lazy-eval]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/lazy_eval.PNG "Lazy Evaluation"partitioner functions and coalesse
 [uncached]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/uncached.png "Uncached"
