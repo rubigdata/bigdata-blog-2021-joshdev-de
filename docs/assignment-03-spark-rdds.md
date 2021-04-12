@@ -8,7 +8,7 @@ I create a file with content "Original", then I define the RDD with the text fil
 
 
 ## Caching RRDs
-Spark does not recompute everything everytime, if intermediate results were computed already they are used for the next computation. However this behaviour is not consistent, in order to enforce it I apply ".cache()" to the RDD. The first picture shows the first request and the second one shows a second request which can reuse the already mapped RDD.
+Spark does not recompute everything everytime, if intermediate results were computed already they are used for the next computation. However this behaviour is not consistent, in order to enforce it I apply ".cache()" to the RDD. The first picture shows the first request and the second one shows a second request which can reuse the already mapped RDD.  
 ![uncached]
 ![cached]
 
