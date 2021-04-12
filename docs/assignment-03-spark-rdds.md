@@ -11,3 +11,8 @@ I create a file with content "Original", then I define the RDD with the text fil
 ## Effect of shuffling and partitions
 
 ## How to avoid shuffling
+
+![namenode-ui]
+
+
+[namenode-ui]: images/lazy_evaluation "Namenode UI"
