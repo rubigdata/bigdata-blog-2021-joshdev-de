@@ -1,5 +1,5 @@
 # Spark RDDs
-In the following paragraphs I will note down the most important insights I gained while working with Spark RDDs
+In the following paragraphs I will note down the most important insights I gained while working with Spark RDDs.
 
 ## Lazy evaluation
 Or in other words: Work is only done if and at the time a result is requested. This goes so far that even reading data from files is done at the moment a result is requested.   A quick example:  
@@ -8,6 +8,9 @@ I create a file with content "Original", then I define the RDD with the text fil
 
 
 ## Caching RRDs
+Spark does not recompute everything everytime, if intermediate results were computed already they are used for the next computation. However this behaviour is not consistent, in order to enforce it I apply ".cache()" to the RDD. The first picture shows the first request and the second one shows a second request which can reuse the already mapped RDD.
+![uncached]
+![cached]
 
 ## Effect of shuffling and partitions
 
@@ -15,3 +18,5 @@ I create a file with content "Original", then I define the RDD with the text fil
 
 
 [lazy-eval]: images/lazy_eval.PNG "Lazy Evaluation"
+[uncached]: images/uncached.png "Uncached"
+[cached]:images/cached.png "Cached"
