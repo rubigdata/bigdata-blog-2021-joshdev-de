@@ -13,12 +13,14 @@ Spark does not recompute everything everytime, if intermediate results were comp
 ![cached]
 
 ## Effect of shuffling and partitions
-Unfortunately I could not test the effects of shuffling and partitions, because no matter how hard I tried I could not get Spark to NOT be efficient.
-I tried using ".map()" instead of ".mapValues()" but Spark carried the partitioner on to the next RDD anyway.
+Shuffling describes the process of shipping data from one node to another one. Shipping data around is always more expensive than just having it at hand.  
+If I have an RDD of key value pairs for example and divide it into 4 partitions using the standard partitioner. If I then want to count the occurence of a special key Spark has no information about where those keys are located so it searches in all 4 partitions.  
+Fortunately there is a way to let Spark know in which partitions a special key resides. The method used are specialized partitioners. One example is the HashPartitioner which can put all keys with the same hash into one partition. If I know want to count the occurence of a special key, Spark knows where to look for the key. It just computes the hash and searches in the RDD that contains all the keys having that hash.  
+But what happens if I modify the RDD now? If I just do a map Spark cannot be sure that the keys are not changed and defaults to the standard partitioner. The knowledge about keys Spark had is lost. So I do a mapValue instead to make sure and tell Spark that the only things changed are the values and the keys remain the same. In this case Spark carries the chosen partitioner on the resulting RDD. 
 
 ## How to avoid shuffling and optimize
 I could not really test how shuffling impacts performance, but it should be avoided by choosing the right partitioner, like a HashPartitioner.
-In order to manage partitions and increase efficiency by choosing the right amount of partitions there are functions to help. ".repartition(n)" is there to partition the RDD into n partitions. ".coalesce(n)" on the other hand merges every n partitions into one partition.  
+In order to manage partitions and increase efficiency by choosing the right amount of partitions there are functions to help. ".repartition(n)" is there to partition the RDD into n partitions. ".coalesce(n)" on the other hand merges every n partitions into one partition.
 
 [lazy-eval]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/lazy_eval.PNG "Lazy Evaluation"
 [uncached]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/uncached.png "Uncached"
