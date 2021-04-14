@@ -22,6 +22,9 @@ But what happens if I modify the RDD now? If I just do a map Spark cannot be sur
 I could not really test how shuffling impacts performance, but it should be avoided by choosing the right partitioner, like a HashPartitioner.
 In order to manage partitions and increase efficiency by choosing the right amount of partitions there are functions to help. ".repartition(n)" is there to partition the RDD into n partitions. ".coalesce(n)" on the other hand merges every n partitions into one partition.
 
+## Conclusions
+To conclude I can say that Spark RDDs are designed to efficient by default, but sometimes the system needs a little help, by choosing the right partitioner for example, in order to make queries faster and more efficient.
+
 [lazy-eval]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/lazy_eval.PNG "Lazy Evaluation"
 [uncached]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/uncached.png "Uncached"
 [cached]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/cached.png "Cached"
