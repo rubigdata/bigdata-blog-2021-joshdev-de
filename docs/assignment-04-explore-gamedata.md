@@ -93,18 +93,18 @@ From the moment I have seen that the compatability with Windows is not 100%, I w
 ```SQL
 select name from osNum where windows = 0
 ```
-
+  
 |name                                 |
 |-------------------------------------|
 |Call of Duty: Black Ops - Mac Edition|
 |WeaponizedChess                      |
-
+  
 One results seems rather obvious, but the other one is actually compatible with Windows today, so the results sadly are not really worth a fun fact.  
 Maybe the next question whether there are games that are compatible with Linux, but not with macOS gives more exciting results.
 ```SQL
 select release, count(release) as num from osNum where mac = 0 and linux = 1 group by release order by release
 ```
-
+  
  | release | num |
  |---------|-----|
  |2008     | 1   |
@@ -116,13 +116,13 @@ select release, count(release) as num from osNum where mac = 0 and linux = 1 gro
  |2015     | 94  |
  |2016     | 110 |
  |2017     | 8   |
-
+  
 When paying attention to the fact that the data was collected in December 2016 it is actually quite interesting and shows that Linux' importance in the gaming scene must have grown in some way.  
 On the other hand macOS still seems to be more relevant as there are actually many more games that are compatible with macOS, but not with Linux as can be seen here.
 ```sql
 select release, count(release) as num from osNum where mac = 1 and linux = 0 group by release order by release
 ```
-
+  
 |release|num|
 |----|--------|
 |2003|1|
@@ -138,7 +138,7 @@ select release, count(release) as num from osNum where mac = 1 and linux = 0 gro
 |2015|452|
 |2016|615|
 |2017|38|
-
+  
 ## Conclusion
 Exploring a different dataset by using the techniques from the premade notebook was a fun experience. Everyone who did not do it missed something. Finding a suitable dataset was not even hard, I just openend the google dataset search and typed "game".
 
