@@ -84,5 +84,9 @@ group by release
 order by release
 ```
 ![graph]
+## The answer
+So what does the graph tell me? Firstly almost every game is compatible with Windows, even though the blue line is barely visible at the very top of the diagram it is there and only very, very slightly dips down in 2012. The next fact clearly visible is that macOS compatability is better than Linux compatability in every year, but they seem to be related. Whenever compatability for macOS rises or falls Linux follows, with one exception. From 2014 to 2015 macOS compatability falls while Linux' rises. It is also very clear that compatability was very bad starting in 2006 and slowly rose until 2013, which was the peak. It then dropped to about 30% for macOS and 20% for Linux in 2016. After that it rises again.  
+*The answer is yes there seems to be a strong relation between the release year of a game and its compatability with different operation systems*
+
 
 [graph]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/game-compatability.png "graph"
