@@ -93,6 +93,7 @@ From the moment I have seen that the compatability with Windows is not 100%, I w
 ```SQL
 select name from osNum where windows = 0
 ```
+
 |name                                 |
 |-------------------------------------|
 |Call of Duty: Black Ops - Mac Edition|
@@ -103,6 +104,7 @@ Maybe the next question whether there are games that are compatible with Linux, 
 ```SQL
 select release, count(release) as num from osNum where mac = 0 and linux = 1 group by release order by release
 ```
+
  | release | num |
  |---------|-----|
  |2008     | 1   |
@@ -120,6 +122,7 @@ On the other hand macOS still seems to be more relevant as there are actually ma
 ```sql
 select release, count(release) as num from osNum where mac = 1 and linux = 0 group by release order by release
 ```
+
 |release|num|
 |----|--------|
 |2003|1|
