@@ -9,7 +9,24 @@ After importing the CSV file to spark all the fields are strings by default, but
 ```Scala
 val tBoolean = udf((f: String) => f.toBoolean)
 ```
+Getting the release year from the date string is a little more complicated though. The provided format is in the form "6 Nov 2004" but there are also cases like "~2007" or "To be announced" so my approach is to take the last for characters of the string and try to cast them to integer. In case of failure the value -1 is assigned, which allows me to remove those lines afterwards.
+```Scala
+def toInt(s: String): Int = {
+  try {
+    s.toInt
+  } catch {
+    case e: Exception => -1
+  }
+}
 
+val getYear = udf((f: String) => toInt(f.takeRight(4)))
+```
+That conversion functions allow me to get a clean dataset with typed columns
+```Scala
+case class OS(name:String, release:Int, windows:Boolean, mac:Boolean, linux:Boolean)
+
+val osDF = gamedata.select($"ResponseName" as "name", getYear($"ReleaseDate") as "release", tBoolean($"PlatformWindows") as "windows", tBoolean($"PlatformMac") as "mac", tBoolean($"PlatformLinux") as "linux").as[OS].cache()
+```
 
 
 [lazy-eval]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/lazy_eval.PNG "Lazy Evaluation"
