@@ -115,4 +115,24 @@ select release, count(release) as num from osNum where mac = 0 and linux = 1 gro
  |2016 | 110 |
  |2017 | 8 |
 
+When paying attention to the fact that the data was collected in December 2016 it is actually quite interesting and shows that Linux' importance in the gaming scene must have grown in some way. On the other hand macOS still seems to be more relevant as there are actually many more games that are compatible with macOS, but not with Linux as can be seen here.
+```sql
+select release, count(release) as num from osNum where mac = 1 and linux = 0 group by release order by release
+```
+|release|num
+|----|--------|
+|2003|1|
+|2006|8|
+|2007|11|
+|2008|16|
+|2009|45|
+|2010|48|
+|2011|53|
+|2012|74|
+|2013|88|
+|2014|278|
+|2015|452|
+|2016|615|
+|2017|38|
+
 [graph]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/game-compatability.png "graph"
