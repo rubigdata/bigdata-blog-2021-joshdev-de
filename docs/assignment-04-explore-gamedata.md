@@ -88,7 +88,7 @@ So what does the graph tell me? Firstly almost every game is compatible with Win
 **The answer is yes, there seems to be a strong relation between the release year of a game on Steam and its compatability with different operation systems!**<br> <br>  
 Some aspects that lower my success: The timeframe is very limited and the data was not confirmed by my research or Steam. 
 
-## Fun fact
+## (kind of) Fun fact
 From the moment I have seen that the compatability with Windows is not 100%, I want to know which game is not compatible with Windows.
 ```SQL
 select name from osNum where windows = 0
@@ -98,5 +98,6 @@ select name from osNum where windows = 0
 |Call of Duty: Black Ops - Mac Edition|
 |WeaponizedChess|
 
+One results seems rather obvious, but the other one is actually compatible with Windows today, so the results sadly are not really worth a fun fact.
 
 [graph]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/game-compatability.png "graph"
