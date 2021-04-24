@@ -47,6 +47,7 @@ osDF.describe().show()
 |    max|zTime (Danger Noo...|             2019|
 +-------+--------------------+-----------------+
 ```
+So using the values as booleans might not be the best decision here. In order to get easy results numeric values are much easier, so a float will help here.
 
 [lazy-eval]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/lazy_eval.PNG "Lazy Evaluation"
 [uncached]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/uncached.png "Uncached"
