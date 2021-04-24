@@ -64,15 +64,15 @@ Now the summary looks very promising and I can already tell that the average gam
 ```
 osNum.describe().show()
 ```
-+-------+--------------------+------------------+--------------------+-------------------+-------------------+
+
 |summary|                name|           release|             windows|                mac|              linux|
-+-------+--------------------+------------------+--------------------+-------------------+-------------------+
+|-------|--------------------|------------------|--------------------|-------------------|-------------------|
 |  count|               13096|             13096|               13096|              13096|              13096|
 |   mean|  3333996.3333333335|2014.5290928527795|  0.9998472816127062|0.34285277947464876|0.23068112400733048|
 | stddev|   5772928.580294436| 2.231519764634232|0.012357456249179848|0.47468089964107957| 0.4212848149792494|
 |    min|! That Bastard Is...|              1997|                   0|                  0|                  0|
 |    max|zTime (Danger Noo...|              2019|                   1|                  1|                  1|
-+-------+--------------------+------------------+--------------------+-------------------+-------------------+
+
 
 From the information about the dataset I know that it was collected in December of 2016, so I do not want to look at years further than 2017, because announced games become fewer after 2017. I also omit years before 2005, because there are not many games released before that and my statistic should not be obfuscated by those outliers. But finally here is the graph for the cleaned and limited dataset.
 ```SQL
