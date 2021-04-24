@@ -75,7 +75,7 @@ osNum.describe().show()
 
 
 From the information about the dataset I know that it was collected in December of 2016, so I do not want to look at years further than 2017, because announced games become fewer after 2017. I also omit years before 2005, because there are not many games released before that and my statistic should not be obfuscated by those outliers. But finally here is the graph for the cleaned and limited dataset.
-```SQL
+```sql
 select release, count(release) as games, avg(windows), avg(mac), avg(linux)
 from osNum
 where release > 2005 and release < 2018
@@ -90,7 +90,7 @@ Some aspects that lower my success: The timeframe is very limited and the data w
 
 ## (kind of) fun facts
 From the moment I have seen that the compatability with Windows is not 100%, I want to know which game is not compatible with Windows.
-```SQL
+```sql
 select name from osNum where windows = 0
 ```
 
@@ -102,7 +102,7 @@ select name from osNum where windows = 0
   
 One results seems rather obvious, but the other one is actually compatible with Windows today, so the results sadly are not really worth a fun fact.  
 Maybe the next question whether there are games that are compatible with Linux, but not with macOS gives more exciting results.
-```SQL
+```sql
 select release, count(release) as num from osNum where mac = 0 and linux = 1 group by release order by release
 ```
   
