@@ -25,7 +25,12 @@ That conversion functions allow me to get a clean dataset with typed columns
 ```Scala
 case class OS(name:String, release:Int, windows:Boolean, mac:Boolean, linux:Boolean)
 
-val osDF = gamedata.select($"ResponseName" as "name", getYear($"ReleaseDate") as "release", tBoolean($"PlatformWindows") as "windows", tBoolean($"PlatformMac") as "mac", tBoolean($"PlatformLinux") as "linux").as[OS].cache()
+val osDF = gamedata.select($"ResponseName" as "name",
+                           getYear($"ReleaseDate") as "release",
+                           tBoolean($"PlatformWindows") as "windows",
+                           tBoolean($"PlatformMac") as "mac",
+                           tBoolean($"PlatformLinux") as "linux")
+                           .as[OS].cache()
 ```
 
 
