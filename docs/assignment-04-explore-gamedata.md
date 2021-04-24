@@ -98,6 +98,21 @@ select name from osNum where windows = 0
 |Call of Duty: Black Ops - Mac Edition|
 |WeaponizedChess|
 
-One results seems rather obvious, but the other one is actually compatible with Windows today, so the results sadly are not really worth a fun fact.
+One results seems rather obvious, but the other one is actually compatible with Windows today, so the results sadly are not really worth a fun fact.  
+Maybe the next question whether there are games that are compatible with Linux, but not with macOS gives more exciting results.
+```SQL
+select release, count(release) as num from osNum where mac = 0 and linux = 1 group by release order by release
+```
+ |release | num|
+ |-----|-------|
+ |2008 | 1 |
+ |2009 | 1 |
+ |2011 | 4 |
+ |2012 | 4 |
+ |2013 | 9 |
+ |2014 | 27 |
+ |2015 | 94 |
+ |2016 | 110 |
+ |2017 | 8 |
 
 [graph]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/game-compatability.png "graph"
