@@ -77,7 +77,11 @@ osNum.describe().show()
 ```
 From the information about the dataset I know that it was collected in December of 2016, so I do not want to look at years further than 2017, because announced games become fewer after 2017. I also omit years before 2005, because there are not many games released before that and my statistic should not be obfuscated by those outliers. But finally here is the graph for the cleaned and limited dataset.
 ```SQL
-select release, count(release) as games, avg(windows), avg(mac), avg(linux) from osNum where release > 2005 and release < 2018 group by release order by release
+select release, count(release) as games, avg(windows), avg(mac), avg(linux)
+from osNum
+where release > 2005 and release < 2018
+group by release
+order by release
 ```
 ![graph]
 
