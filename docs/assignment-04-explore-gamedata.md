@@ -115,7 +115,8 @@ select release, count(release) as num from osNum where mac = 0 and linux = 1 gro
  |2016 | 110 |
  |2017 | 8 |
 
-When paying attention to the fact that the data was collected in December 2016 it is actually quite interesting and shows that Linux' importance in the gaming scene must have grown in some way. On the other hand macOS still seems to be more relevant as there are actually many more games that are compatible with macOS, but not with Linux as can be seen here.
+When paying attention to the fact that the data was collected in December 2016 it is actually quite interesting and shows that Linux' importance in the gaming scene must have grown in some way.  
+On the other hand macOS still seems to be more relevant as there are actually many more games that are compatible with macOS, but not with Linux as can be seen here.
 ```sql
 select release, count(release) as num from osNum where mac = 1 and linux = 0 group by release order by release
 ```
