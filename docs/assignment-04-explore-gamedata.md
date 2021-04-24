@@ -93,10 +93,10 @@ From the moment I have seen that the compatability with Windows is not 100%, I w
 ```SQL
 select name from osNum where windows = 0
 ```
-|name |
-|---------------------------|
+|name                                 |
+|-------------------------------------|
 |Call of Duty: Black Ops - Mac Edition|
-|WeaponizedChess|
+|WeaponizedChess                      |
 
 One results seems rather obvious, but the other one is actually compatible with Windows today, so the results sadly are not really worth a fun fact.  
 Maybe the next question whether there are games that are compatible with Linux, but not with macOS gives more exciting results.
