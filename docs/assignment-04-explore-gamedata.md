@@ -1,5 +1,5 @@
 # Exploring Steam Game Data
-In this blog post I will explore (this)[https://data.world/craigkelly/steam-game-data] dataset about steam games.
+In this blog post I will explore [this](https://data.world/craigkelly/steam-game-data) dataset about steam games.
 
 ## The question to answer
 I want to find out whether there is a relation between the release date of a game and its compatability with different operating systems. The dataset contains the release date and the information whether the game runs on Windows, macOS and Linux. Hence the data is suitable and I can continue.
