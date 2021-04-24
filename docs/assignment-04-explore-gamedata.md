@@ -34,7 +34,7 @@ val osDF = gamedata.select($"ResponseName" as "name",
 ```
 ## Answering the question
 When I now look at the averages I notice that all my boolean columns are missing in the summary.
-```Scala
+```
 osDF.describe().show()
 
 +-------+--------------------+-----------------+
