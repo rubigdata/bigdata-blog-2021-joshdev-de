@@ -93,7 +93,7 @@ From the moment I have seen that the compatability with Windows is not 100%, I w
 ```SQL
 select name from osNum where windows = 0
 ```
-placeholder  
+
 
 |name                                 |
 |-------------------------------------|
