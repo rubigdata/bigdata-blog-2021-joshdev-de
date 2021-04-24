@@ -93,7 +93,8 @@ From the moment I have seen that the compatability with Windows is not 100%, I w
 ```SQL
 select name from osNum where windows = 0
 ```
-  
+placeholder  
+
 |name                                 |
 |-------------------------------------|
 |Call of Duty: Black Ops - Mac Edition|
@@ -105,17 +106,17 @@ Maybe the next question whether there are games that are compatible with Linux, 
 select release, count(release) as num from osNum where mac = 0 and linux = 1 group by release order by release
 ```
   
- | release | num |
+ |release  |num |
  |---------|-----|
- |2008     | 1   |
- |2009     | 1   |
- |2011     | 4   |
- |2012     | 4   |
- |2013     | 9   |
- |2014     | 27  |
- |2015     | 94  |
- |2016     | 110 |
- |2017     | 8   |
+ |2008     | 1|
+ |2009     | 1|
+ |2011     | 4|
+ |2012     | 4|
+ |2013     | 9|
+ |2014     | 27|
+ |2015     | 94|
+ |2016     | 110|
+ |2017     | 8|
   
 When paying attention to the fact that the data was collected in December 2016 it is actually quite interesting and shows that Linux' importance in the gaming scene must have grown in some way.  
 On the other hand macOS still seems to be more relevant as there are actually many more games that are compatible with macOS, but not with Linux as can be seen here.
