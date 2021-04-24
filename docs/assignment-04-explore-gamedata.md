@@ -88,7 +88,7 @@ So what does the graph tell me? Firstly almost every game is compatible with Win
 **The answer is yes, there seems to be a strong relation between the release year of a game on Steam and its compatability with different operation systems!**<br> <br>  
 Some aspects that lower my success: The timeframe is very limited and the data was not confirmed by my research or Steam. 
 
-## (kind of) Fun fact
+## (kind of) fun facts
 From the moment I have seen that the compatability with Windows is not 100%, I want to know which game is not compatible with Windows.
 ```SQL
 select name from osNum where windows = 0
@@ -135,5 +135,8 @@ select release, count(release) as num from osNum where mac = 1 and linux = 0 gro
 |2015|452|
 |2016|615|
 |2017|38|
+
+## Conclusion
+Exploring a different dataset by using the techniques from the premade notebook was a fun experience. Everyone who did not do it missed something. Finding a suitable dataset was not even hard, I just openend the google dataset search and typed "gaming".
 
 [graph]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/game-compatability.png "graph"
