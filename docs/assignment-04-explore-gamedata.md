@@ -137,6 +137,6 @@ select release, count(release) as num from osNum where mac = 1 and linux = 0 gro
 |2017|38|
 
 ## Conclusion
-Exploring a different dataset by using the techniques from the premade notebook was a fun experience. Everyone who did not do it missed something. Finding a suitable dataset was not even hard, I just openend the google dataset search and typed "gaming".
+Exploring a different dataset by using the techniques from the premade notebook was a fun experience. Everyone who did not do it missed something. Finding a suitable dataset was not even hard, I just openend the google dataset search and typed "game".
 
 [graph]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/game-compatability.png "graph"
