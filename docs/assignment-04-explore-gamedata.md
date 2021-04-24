@@ -93,6 +93,10 @@ From the moment I have seen that the compatability with Windows is not 100%, I w
 ```SQL
 select name from osNum where windows = 0
 ```
+|name |
+|---------------------------|
+|Call of Duty: Black Ops - Mac Edition|
+|WeaponizedChess|
 
 
 [graph]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/game-compatability.png "graph"
