@@ -37,15 +37,14 @@ When I now look at the averages I notice that all my boolean columns are missing
 ```
 osDF.describe().show()
 ```
-+-------+--------------------+-----------------+
-|summary|                name|          release|
-+-------+--------------------+-----------------+
-|  count|               13357|            13357|
-|   mean|  3333996.3333333335|1975.145017593771|
-| stddev|   5772928.580294436|278.9970496372111|
-|    min|! That Bastard Is...|               -1|
-|    max|zTime (Danger Noo...|             2019|
-+-------+--------------------+-----------------+
+
+|summary|                name|          release|  
+|-------|--------------------|-----------------|  
+|  count|               13357|            13357|  
+|   mean|  3333996.3333333335|1975.145017593771|  
+| stddev|   5772928.580294436|278.9970496372111|  
+|    min|! That Bastard Is...|               -1|  
+|    max|zTime (Danger Noo...|             2019|  
 
 So using the values as booleans might not be the best decision here. In order to get easy results numeric values are much easier, so a float will help here.
 The following functions do the job for me.
