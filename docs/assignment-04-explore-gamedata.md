@@ -6,7 +6,7 @@ I want to find out whether there is a relation between the release date of a gam
 
 ## Preparing the data
 After importing the CSV file to spark all the fields are strings by default, but I need them to be and an integer for the release year and booleans for the fact whether they are compatible with the operating systems. In order to archive that I use some selfmade conversion functions. Converting strings to booleans is rather easy, but does not happen automatically so the function used for that is:  
-```Scala
+```scala
 val tBoolean = udf((f: String) => f.toBoolean)
 ```
 Getting the release year from the date string is a little more complicated though. The provided format is in the form "6 Nov 2004" but there are also cases like "~2007" or "To be announced" so my approach is to take the last for characters of the string and try to cast them to integer. In case of failure the value -1 is assigned, which allows me to remove those lines afterwards.
@@ -22,7 +22,7 @@ def toInt(s: String): Int = {
 val getYear = udf((f: String) => toInt(f.takeRight(4)))
 ```
 That conversion functions allow me to get a clean dataset with typed columns
-```Scala
+```scala
 case class OS(name:String, release:Int, windows:Boolean, mac:Boolean, linux:Boolean)
 
 val osDF = gamedata.select($"ResponseName" as "name",
@@ -48,7 +48,7 @@ osDF.describe().show()
 
 So using the values as booleans might not be the best decision here. In order to get easy results numeric values are much easier, so a float will help here.
 The following functions do the job for me.
-```Scala
+```scala
 val tFloat = udf((f: Boolean) => if (f) 1 else 0)
 
 case class osNumeric(name:String, release:Int, windows:Int, mac:Int, linux:Int)
