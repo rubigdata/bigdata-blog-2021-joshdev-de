@@ -32,7 +32,21 @@ val osDF = gamedata.select($"ResponseName" as "name",
                            tBoolean($"PlatformLinux") as "linux")
                            .as[OS].cache()
 ```
+## Answering the question
+When I now look at the averages I notice that all my boolean columns are missing in the summary.
+```Scala
+osDF.describe().show()
 
++-------+--------------------+-----------------+
+|summary|                name|          release|
++-------+--------------------+-----------------+
+|  count|               13357|            13357|
+|   mean|  3333996.3333333335|1975.145017593771|
+| stddev|   5772928.580294436|278.9970496372111|
+|    min|! That Bastard Is...|               -1|
+|    max|zTime (Danger Noo...|             2019|
++-------+--------------------+-----------------+
+```
 
 [lazy-eval]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/lazy_eval.PNG "Lazy Evaluation"
 [uncached]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/uncached.png "Uncached"
