@@ -25,7 +25,7 @@ The amount of items sold per type
 SELECT tpe, count(*) FROM runes GROUP BY tpe
 ```
 
-|tpe|count(1)|
+|type|count|
 |--|--|
 |Sword|416|
 |Hasta|449|
@@ -45,3 +45,6 @@ the amount of money spent on all types of swords
 ```sql
 SELECT sum(price) FROM runes WHERE tpe = 'Sword' or tpe = 'Two-handed sword' or tpe = 'Longsword'
 ```
+| sum(price) |
+|------------|
+|16671107|
