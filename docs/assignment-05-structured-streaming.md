@@ -3,7 +3,9 @@ In this blog post I will describe my experience with Spark Structured Streaming
 
 ## Difficulties
 
-The main difficultiy I experienced using streams in that the data is not present in the form of files, but needs to be received and stored first (in the case of the assignment). Starting and stopping the process of collecting data manually just does not fit into the conceptual view I developed of Spark. Parsing the input stream was quite easy using the regular expression with the premade expression, but completely writing it myself is something that would take much more time as I am not familiar with the notation used, even though I am quite experienced with the concept.
+The main difficultiy I experienced using streams in that the data is not present in the form of files, but needs to be received and stored first (in the case of the assignment). Starting and stopping the process of collecting data manually just does not fit into the conceptual view I developed of Spark.  
+Parsing the input stream was quite easy using the regular expression with the premade expression, but completely writing it myself is something that would take much more time as I am not familiar with the notation used, even though I am quite experienced with the concept.  
+Unfortunately I was not able to do batch processing.
 
 ## Easy steps
 
