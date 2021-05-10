@@ -8,4 +8,5 @@ I am **Joshua Steinmann**, my student number is **s1015908** and I study Compute
  - [my hadoop jobs](https://rubigdata.github.io/bigdata-blog-2021-joshdev-de/assignment-02-own-jobs) (second assignment)
  - [Spark RDDs](https://rubigdata.github.io/bigdata-blog-2021-joshdev-de/assignment-03-spark-rdds) (third assignment)
  - [Exploring Steam Game Data](https://rubigdata.github.io/bigdata-blog-2021-joshdev-de/assignment-04-explore-gamedata) (fourth assignment)
+ - [Spark Structured Streaming](https://rubigdata.github.io/bigdata-blog-2021-joshdev-de/assignment-05-structured-streaming) (fifth assignment)
 
