@@ -177,7 +177,7 @@ Here you can see how the application itself is held in HDFS.<br><br>
 ![namenode-fs]  
 <br>
 **Isn't it beautiful? :)** <br>
-Here you see it in the queue dashboard (of course in the gold queue, only the best for my app): <br><br>
+Here you see it in the queue dashboard using the ressources (of course in the gold queue, only the best for my app): <br><br>
 ![yarn-queue]  
 <br>
 
