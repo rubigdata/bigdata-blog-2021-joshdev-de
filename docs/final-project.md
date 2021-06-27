@@ -181,13 +181,16 @@ Here you see it in the queue dashboard using the ressources (of course in the go
 ![yarn-queue]  
 <br>
 **And now the final result**
+<br>
 ![final-result]  
+<br>
 So as you see Xbox is much more popular than Playstation and wins the battle!  
 There is 10 times more "xbox" than "playstation".  
 There are about 15 "xbox" per page that contains "xbox" and about 8 "playstation" per page that contains "playstation".
 That huge difference points to something that might be going on besides "xbox" just being better.
 
-One might argue that especially the word "xbox" might occur in HTML source code and that this fact might harm the validity of my result, but I leave this issue to some further investigation by someone else. There is quite a lot of statistical tricks you could apply to squeeze more information out of the word count, but that should be easy to add in the same place as I added the page counter. As soon as the HTML pages are reduced to a tuple of integers processing gets much cheaper.
+One might argue that especially the word "xbox" might occur in HTML source code and that this fact might harm the validity of my result, but I leave this issue to some further investigation by someone else. Using more advanced regular expression one might be able to only parse visible text, but I could not accomplish that.  
+There is quite a lot of statistical tricks you could apply to squeeze more information out of the word count, but that should be easy to add in the same place as I added the page counter. As soon as the HTML pages are reduced to a tuple of integers processing gets much cheaper.
 
 
 ## Thank you!
