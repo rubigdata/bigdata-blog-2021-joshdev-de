@@ -5,9 +5,67 @@ I describe the process and problems that occured.
 ## The question to answer
 Crawl data holds a lot of information, so the choice of a question was not easy.  
 I decided to answer on of the most crucial questions:  
-**Xbox or Playstation?!**
+**Xbox or Playstation?!**  
+In order to answer this question I simply count how often the words xbox and playstation occur in the html pages stored in the web crawl.  
+Later I also decided to count the amount of webpages each word occurs on.
 
-## Preparing the data
+## First steps, preparing the data
+The first step is to find a way to make spark handle warc files. Warc is the format in which web crawls are stored nowadays and they hold metadata about the web query and the answer as well as the answer itself. I use a premade library and some spark magic of define a spark session with a custom configuration and data frame.
+
+```scala
+import org.apache.spark.SparkConf
+import org.apache.spark.sql.SparkSession
+
+import org.apache.hadoop.io.NullWritable
+
+import de.l3s.concatgz.io.warc.{WarcGzInputFormat,WarcWritable}
+import de.l3s.concatgz.data.WarcRecord
+
+val sparkConf = new SparkConf()
+                          .setAppName("Relevance Counter")
+                          .set("spark.memory.offHeap.enabled", "true")  // allow heap data to be stored outside the JVM memory segment
+                          .set("spark.memory.offHeap.size", "8g")       // specifies size of off heap space
+                          .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+                          .registerKryoClasses(Array(classOf[WarcRecord]))
+
+    implicit val sparkSession = SparkSession.builder().config(sparkConf).getOrCreate()
+    val sc = sparkSession.sparkContext
+
+    val warcs = sc.newAPIHadoopFile(
+                  warcLocation,
+                  classOf[WarcGzInputFormat],             // InputFormat
+                  classOf[NullWritable],                  // Key
+                  classOf[WarcWritable]                   // Value
+        )
+```
+
+
+
+
+
+For my question I am only interested in the webpages itself so the only thing I care about are responses which hold html files. Another important step is to filter out any invalid entries to not get undefined behaviour. The steps of preparing the data can be seen here:
+
+```scala
+val plainHTML = warcs.map { wr => wr._2}
+            .filter{ _.isValid() }
+            .map{ _.getRecord() }
+            .filter{ _.getHeader.getHeaderValue("WARC-Type") == "response" }
+            .filter{ _.getHttpMimeType() == "text/html" }
+            .map{ _.getHttpStringBody() }
+```
+
+Now that I have a data frame of plain html pages I can count the words "xbox" and "playstation" easily right?  
+No it is not easy and you will read why in the following section.
+
+## Counting words efficiently is hard!
+
+
+
+
+
+
+
+
 After importing the CSV file to spark all the fields are strings by default, but I need them to be and an integer for the release year and booleans for the fact whether they are compatible with the operating systems. In order to archive that I use some selfmade conversion functions. Converting strings to booleans is rather easy, but does not happen automatically so the function used for that is:  
 ```scala
 val tBoolean = udf((f: String) => f.toBoolean)
