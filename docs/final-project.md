@@ -173,12 +173,13 @@ You then need some spark cluster setup (local or remote) to submit the applicati
 
 ## Final answer
 Just to keep the excitement some more here are some screenshots of my final program running on the cluster.  
-Here you can see how the application itself is held in HDFS
+Here you can see how the application itself is held in HDFS.<br><br>
 ![namenode-fs]  
-Isn't it beautiful? :)
+<br>
+**Isn't it beautiful? :)**
 Here you see it in the queue dashboard:
 ![yarn-queue]  
-
+<br>
 
 ## Thank you!
 
