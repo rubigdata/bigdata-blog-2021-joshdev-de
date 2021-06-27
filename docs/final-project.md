@@ -1,6 +1,7 @@
 # Exploring a web crawl
 In this blog post I will describe how to process web crawl data.  
 I describe the process and problems that occured.
+In the last section I give some ressources which explain the process of getting the scala program to run on a cluster.
 
 ## The question to answer
 Crawl data holds a lot of information, so the choice of a question was not easy.  
@@ -98,7 +99,7 @@ Count of playstation:  2686489
 ## Convenience features
 Now that the program is finally running it is time for some improvments!  
 The first one is to make the warc location and searched words which are hardcoded at the moment arguments of the program.  
-The second one is to count the number of pages each word occurs on. The program now looks like this (ready for you to copy):
+The second one is to count the number of pages each word occurs on. The program now looks like this (ready for you to copy):  
 I use clever pattern matching to introduce the second improvment and simple built in functionality to realize the parameterization.
 ```scala
 import org.apache.spark.SparkConf
@@ -160,7 +161,10 @@ object RUBigDataApp {
 }
 ```
 
-
+## Running a (scala-) spark application on a cluster
+To be honest the default container given to me for the purpose of this project was enough to compile the program.  
+For everyone which is not part of this course the following ressources are helpful to find out about the process:  
+ * [creating standalone spark app](self-contained Spark apps)
 
 
 
