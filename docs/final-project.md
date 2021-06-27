@@ -180,7 +180,8 @@ Here you can see how the application itself is held in HDFS.<br><br>
 Here you see it in the queue dashboard using the ressources (of course in the gold queue, only the best for my app): <br><br>
 ![yarn-queue]  
 <br>
-
+**And now the final result**
+![final-result]
 So as you see Xbox is much more popular than Playstation and wins the battle!
 
 One might argue that especially the word "xbox" might occur in HTML source code and that this fact might harm the validity of my result, but I leave this issue to some further investigation by someone else. There is quite a lot of statistical tricks you could apply to squeeze more information out of the word count, but that should be easy to add in the same place as I added the page counter. As soon as the HTML pages are reduced to a tuple of integers processing gets much cheaper.
