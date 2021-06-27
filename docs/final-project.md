@@ -98,7 +98,8 @@ Count of playstation:  2686489
 ## Convenience features
 Now that the program is finally running it is time for some improvments!  
 The first one is to make the warc location and searched words which are hardcoded at the moment arguments of the program.  
-The second one is to count the number of pages each word occurs on. The program now looks like this:
+The second one is to count the number of pages each word occurs on. The program now looks like this (ready for you to copy):
+I use clever pattern matching to introduce the second improvment and simple built in functionality to realize the parameterization.
 ```scala
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
