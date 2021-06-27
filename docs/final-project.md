@@ -28,15 +28,15 @@ val sparkConf = new SparkConf()
                           .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
                           .registerKryoClasses(Array(classOf[WarcRecord]))
 
-    implicit val sparkSession = SparkSession.builder().config(sparkConf).getOrCreate()
-    val sc = sparkSession.sparkContext
+implicit val sparkSession = SparkSession.builder().config(sparkConf).getOrCreate()
+val sc = sparkSession.sparkContext
 
-    val warcs = sc.newAPIHadoopFile(
-                  warcLocation,
-                  classOf[WarcGzInputFormat],             // InputFormat
-                  classOf[NullWritable],                  // Key
-                  classOf[WarcWritable]                   // Value
-        )
+val warcs = sc.newAPIHadoopFile(
+              warcLocation,
+              classOf[WarcGzInputFormat],             // InputFormat
+              classOf[NullWritable],                  // Key
+              classOf[WarcWritable]                   // Value
+    )
 ```
 
 
