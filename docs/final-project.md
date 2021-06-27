@@ -1,6 +1,6 @@
 # Exploring a web crawl
 In this blog post I will describe how to process web crawl data.  
-I describe the process and problems that occured.
+I describe the process and problems that occurred.
 In the last section I give some ressources which explain the process of getting the scala program to run on a cluster.
 
 ## The question to answer
@@ -152,9 +152,9 @@ object RUBigDataApp {
                 .reduce({ case((x1, p1, xo1, po1), (x2, p2, xo2, po2)) => (x1 + x2, p1 + p2, xo1 + xo2, po1 + po2) })
 
     println(s"Count of $word1: \t" + matches._1)
-    println(s"$word1 occured on pages: \t" + matches._3)
+    println(s"$word1 occurred on pages: \t" + matches._3)
     println(s"Count of $word2: \t" + matches._2)
-    println(s"$word2 occured on pages: \t" + matches._4)
+    println(s"$word2 occurred on pages: \t" + matches._4)
 
     sparkSession.stop()
   }
