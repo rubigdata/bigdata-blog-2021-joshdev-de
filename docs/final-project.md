@@ -73,7 +73,7 @@ Using `.r` the string is turned into a regular expression which can then be foun
 val xboxCount = plainHTML.map{ text => "xbox".r.findAllIn(text).size }.sum()
 ```
 But that improvement brings no success and I am greeted with the following log entry again even though special memory settings are applied to give spark more memory space to work with:  
-![oom-pic]
+![oom-pic]  
 The next step is to eliminate the step of parsing the HTML page and work with the plain file:
 ```scala
 val parsed = plainHTML.map{ _.toLowerCase()}
@@ -174,10 +174,10 @@ You then need some spark cluster setup (local or remote) to submit the applicati
 ## Final answer
 Just to keep the excitement some more here are some screenshots of my final program running on the cluster.  
 Here you can see how the application itself is held in HDFS
-![namenode-fs]
+![namenode-fs]  
 Isn't it beautiful? :)
 Here you see it in the queue dashboard:
-![yarn-queue]
+![yarn-queue]  
 
 
 ## Thank you!
