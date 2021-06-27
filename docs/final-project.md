@@ -72,8 +72,8 @@ Using `.r` the string is turned into a regular expression which can then be foun
 ```scala
 val xboxCount = plainHTML.map{ text => "xbox".r.findAllIn(text).size }.sum()
 ```
-But that improvement brings no success and I am greeted with the following log entry again even though special memory settings are applied to give spark more memory space to work with:
-![OOM-pic]
+But that improvement brings no success and I am greeted with the following log entry again even though special memory settings are applied to give spark more memory space to work with:  
+![oom-pic]
 The next step is to eliminate the step of parsing the HTML page and work with the plain file:
 ```scala
 val parsed = plainHTML.map{ _.toLowerCase()}
@@ -173,12 +173,11 @@ You then need some spark cluster setup (local or remote) to submit the applicati
 
 ## Final answer
 Just to keep the excitement some more here are some screenshots of my final program running on the cluster.  
-
 Here you can see how the application itself is held in HDFS
-
+![namenode-fs]
 Isn't it beautiful? :)
 Here you see it in the queue dashboard:
-
+![yarn-queue]
 
 
 ## Thank you!
@@ -187,9 +186,7 @@ Here you see it in the queue dashboard:
 
 
 
-![graph]
 [oom-pic]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/oom-pic.png "oom-pic"
 [namenode-fs]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/namenode-fs.png "stored-app"
 [yarn-queue]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/yarn-queue.png "yarn queue"
 
-[graph]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/game-compatability.png "graph"
