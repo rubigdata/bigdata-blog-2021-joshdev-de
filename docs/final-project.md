@@ -164,14 +164,26 @@ object RUBigDataApp {
 ## Running a (scala-) spark application on a cluster
 To be honest the default container given to me for the purpose of this project was enough to compile the program.  
 For everyone which is not part of this course the following ressources are helpful to find out about the process:  
- * [creating standalone spark app](self-contained Spark apps)
+ * [creating standalone spark app] (http://spark.apache.org/docs/3.1.1/quick-start.html#self-contained-applications)
+ * [using sbt to compile scala apps] (https://docs.scala-lang.org/getting-started/sbt-track/getting-started-with-scala-and-sbt-on-the-command-line.html)
+ * [sbt-assembly for dependecy management] (https://github.com/sbt/sbt-assembly)
+
+You then need some spark cluster setup (local or remote) to submit the application.  
+[Here] (http://spark.apache.org/docs/3.1.1/submitting-applications.html)  you find infomation on that.
+
+## Final answer
+Just to keep the excitement some more here are some screenshots of my final program running on the cluster.  
+
+Here you can see how the application itself is held in HDFS
+
+Isn't it beautiful? :)
+Here you see it in the queue dashboard:
 
 
 
+## Thank you!
 
-```scala
 
-```
 
 
 
