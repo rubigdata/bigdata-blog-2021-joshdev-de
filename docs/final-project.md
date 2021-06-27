@@ -176,8 +176,8 @@ Just to keep the excitement some more here are some screenshots of my final prog
 Here you can see how the application itself is held in HDFS.<br><br>
 ![namenode-fs]  
 <br>
-**Isn't it beautiful? :)**
-Here you see it in the queue dashboard:
+**Isn't it beautiful? :)** <br>
+Here you see it in the queue dashboard: <br><br>
 ![yarn-queue]  
 <br>
 
