@@ -58,73 +58,117 @@ Now that I have a data frame of plain html pages I can count the words "xbox" an
 No it is not easy and you will read why in the following section.
 
 ## Counting words efficiently is hard!
-
-
-
-
-
-
-
-
-After importing the CSV file to spark all the fields are strings by default, but I need them to be and an integer for the release year and booleans for the fact whether they are compatible with the operating systems. In order to archive that I use some selfmade conversion functions. Converting strings to booleans is rather easy, but does not happen automatically so the function used for that is:  
+My first attempt on counting the words was like the following:
+I parse the HTML page to only get the visible text and put that to lower case. Then I split the text by spacebars to create an array of words. the last step is to filter the array to only keep the words that contain either "xbox" or "playstation" and then count the remaining words. In the end all the word counts in the different texts are summed up.
 ```scala
-val tBoolean = udf((f: String) => f.toBoolean)
+val parsed = plainHTML.map{ wr => Jsoup.parse(wr).text().toLowerCase().split(" ")}
+val xboxCount = parsed.map{ _.filter( x => x.contains("xbox")).length }.sum()
+val playstationCount = parsed.map{ _.filter( x => x.contains("playstation")).length }.sum()
 ```
-Getting the release year from the date string is a little more complicated though. The provided format is in the form "6 Nov 2004" but there are also cases like "~2007" or "To be announced" so my approach is to take the last for characters of the string and try to cast them to integer. In case of failure the value -1 is assigned, which allows me to remove those lines afterwards.
+The strategy works well on small amounts of data, but when querying even a fraction of a full web crawl spark runs out of memory.  
+In order to solve this the first step is to make the word counting more effiecent with the help of regular expressions like this:
+Using `.r` the string is turned into a regular expression which can then be found in the text. The size of the resulting MatchIterator just gives the amount of found matches.
 ```scala
-def toInt(s: String): Int = {
-  try {
-    s.toInt
-  } catch {
-    case e: Exception => -1
+val xboxCount = plainHTML.map{ text => "xbox".r.findAllIn(text).size }.sum()
+```
+But that improvement brings no success and I am greeted with the following log entry again even though special memory settings are applied to give spark more memory space to work with:
+![OOM-pic]
+The next step is to eliminate the step of parsing the HTML page and work with the plain file:
+```scala
+val parsed = plainHTML.map{ _.toLowerCase()}
+```
+As I learn quickly even the step of putting the text to lower case is too memory intensive. Luckily regular expressions can be made case insensitive like this:
+```scala
+val xboxNum = plainHTML.map{ text => "(?i)xbox".r.findAllIn(text).size }.sum()
+val playstationNum = plainHTML.map{ text => "(?i)playstation".r.findAllIn(text).size }.sum()
+```
+
+Like this two passes over the data are needed and that seems inefficient so I merge the two queries into one like this:
+Instead of creating two values I create a touple and reduce the touples by summing the first and second entries individually.
+```scala
+val matches = plainHTML.map{ text => ("(?i)xbox".r.findAllIn(text).size, "(?i)playstation".r.findAllIn(text).size )}
+                .reduce({case((x1, p1), (x2, p2)) => (x1 + x2, p1 + p2)})
+```
+Finally! This program runs on a large fraction of the web crawl and gives me the following result:
+```
+Count of xbox: 		     27064534
+Count of playstation:  2686489
+```
+
+## Convenience features
+Now that the program is finally running it is time for some improvments!  
+The first one is to make the warc location and searched words which are hardcoded at the moment arguments of the program.  
+The second one is to count the number of pages each word occurs on. The program now looks like this:
+```scala
+import org.apache.spark.SparkConf
+import org.apache.spark.sql.SparkSession
+
+import org.apache.hadoop.io.NullWritable
+
+import de.l3s.concatgz.io.warc.{WarcGzInputFormat,WarcWritable}
+import de.l3s.concatgz.data.WarcRecord
+
+
+object RUBigDataApp {
+  def main(args: Array[String]) {
+
+    val warcLocation = args(0)
+    val word1 = args(1)
+    val word2 = args(2)
+
+    val sparkConf = new SparkConf()
+                          .setAppName("Relevance Counter")
+                          .set("spark.memory.offHeap.enabled", "true")  // allow heap data to be stored outside the JVM memory segment
+                          .set("spark.memory.offHeap.size", "8g")       // specifies size of off heap space
+                          .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+                          .registerKryoClasses(Array(classOf[WarcRecord]))
+
+    implicit val sparkSession = SparkSession.builder().config(sparkConf).getOrCreate()
+    val sc = sparkSession.sparkContext
+
+    val warcs = sc.newAPIHadoopFile(
+                  warcLocation,
+                  classOf[WarcGzInputFormat],             // InputFormat
+                  classOf[NullWritable],                  // Key
+                  classOf[WarcWritable]                   // Value
+        )
+
+    val plainHTML = warcs.map { wr => wr._2}
+                .filter{ _.isValid() }
+                .map{ _.getRecord() }
+                .filter{ _.getHeader.getHeaderValue("WARC-Type") == "response" }
+                .filter{ _.getHttpMimeType() == "text/html" }
+                .map{ _.getHttpStringBody() }
+
+    val matches = plainHTML.map{ text => (s"(?i)$word1".r.findAllIn(text).size, s"(?i)$word2".r.findAllIn(text).size )}
+                .map({
+                    case(0, 0) => (0, 0, 0, 0)
+                    case(0, p) => (0, p, 0, 1)
+                    case(x, 0) => (x, 0, 1, 0)
+                    case(x, p) => (x, p, 1, 1)
+                })
+                .reduce({ case((x1, p1, xo1, po1), (x2, p2, xo2, po2)) => (x1 + x2, p1 + p2, xo1 + xo2, po1 + po2) })
+
+    println(s"Count of $word1: \t" + matches._1)
+    println(s"$word1 occured on pages: \t" + matches._3)
+    println(s"Count of $word2: \t" + matches._2)
+    println(s"$word2 occured on pages: \t" + matches._4)
+
+    sparkSession.stop()
   }
 }
-
-val getYear = udf((f: String) => toInt(f.takeRight(4)))
 ```
-That conversion functions allow me to get a clean dataset with typed columns
+
+
+
+
+
+
 ```scala
-case class OS(name:String, release:Int, windows:Boolean, mac:Boolean, linux:Boolean)
 
-val osDF = gamedata.select($"ResponseName" as "name",
-                           getYear($"ReleaseDate") as "release",
-                           tBoolean($"PlatformWindows") as "windows",
-                           tBoolean($"PlatformMac") as "mac",
-                           tBoolean($"PlatformLinux") as "linux")
-                           .as[OS].cache()
-```
-## Answering the question
-When I now look at the averages I notice that all my boolean columns are missing in the summary.
-```scala
-osDF.describe().show()
 ```
 
-|summary|                name|          release|  
-|-------|--------------------|-----------------|  
-|  count|               13357|            13357|  
-|   mean|  3333996.3333333335|1975.145017593771|  
-| stddev|   5772928.580294436|278.9970496372111|  
-|    min|! That Bastard Is...|               -1|  
-|    max|zTime (Danger Noo...|             2019|  
 
-So using the values as booleans might not be the best decision here. In order to get easy results numeric values are much easier, so a float will help here.
-The following functions do the job for me.
-```scala
-val tFloat = udf((f: Boolean) => if (f) 1 else 0)
-
-case class osNumeric(name:String, release:Int, windows:Int, mac:Int, linux:Int)
-
-val osNum = gamedata.select($"ResponseName" as "name",
-                           getYear($"ReleaseDate") as "release",
-                           tFloat(tBoolean($"PlatformWindows")) as "windows",
-                           tFloat(tBoolean($"PlatformMac")) as "mac",
-                           tFloat(tBoolean($"PlatformLinux")) as "linux")
-                           .as[osNumeric].filter("release != -1").cache()
-``` 
-Now the summary looks very promising and I can already tell that the average game was released in 2014 and the overall propability of a game in my cleaned dataset being compatible with Windows is 99.98%, with macOS is 34.29% and with Linux is 23.07%.
-```
-osNum.describe().show()
-```
 
 |summary|                name|           release|             windows|                mac|              linux|
 |-------|--------------------|------------------|--------------------|-------------------|-------------------|
@@ -135,73 +179,7 @@ osNum.describe().show()
 |    max|zTime (Danger Noo...|              2019|                   1|                  1|                  1|
 
 
-From the information about the dataset I know that it was collected in December of 2016, so I do not want to look at years further than 2017, because announced games become fewer after 2017. I also omit years before 2005, because there are not many games released before that and my statistic should not be obfuscated by those outliers. But finally here is the graph for the cleaned and limited dataset.
-```sql
-select release, count(release) as games, avg(windows), avg(mac), avg(linux)
-from osNum
-where release > 2005 and release < 2018
-group by release
-order by release
-```
 ![graph]
-## The answer
-So what does the graph tell me? Firstly almost every game is compatible with Windows, even though the blue line is barely visible at the very top of the diagram it is there and only very, very slightly dips down in 2012. The next fact clearly visible is that macOS compatability is better than Linux compatability in every year, but they seem to be related. Whenever compatability for macOS rises or falls Linux follows, with one exception. From 2014 to 2015 macOS compatability falls while Linux' rises. It is also very clear that compatability was very bad starting in 2006 and slowly rose until 2013, which was the peak. It then dropped to about 30% for macOS and 20% for Linux in 2016. After that it rises again. <br> <br>
-**The answer is yes, there seems to be a strong relation between the release year of a game on Steam and its compatability with different operation systems!**<br> <br>  
-Some aspects that lower my success: The timeframe is very limited and the data was not confirmed by my research or Steam. 
 
-## (kind of) fun facts
-From the moment I have seen that the compatability with Windows is not 100%, I want to know which game is not compatible with Windows.
-```sql
-select name from osNum where windows = 0
-```
-
-
-|name                                 |
-|-------------------------------------|
-|Call of Duty: Black Ops - Mac Edition|
-|WeaponizedChess                      |
-  
-One results seems rather obvious, but the other one is actually compatible with Windows today, so the results sadly are not really worth a fun fact.  
-Maybe the next question whether there are games that are compatible with Linux, but not with macOS gives more exciting results.
-```sql
-select release, count(release) as num from osNum where mac = 0 and linux = 1 group by release order by release
-```
-  
- |release  |num |
- |---------|-----|
- |2008     | 1|
- |2009     | 1|
- |2011     | 4|
- |2012     | 4|
- |2013     | 9|
- |2014     | 27|
- |2015     | 94|
- |2016     | 110|
- |2017     | 8|
-  
-When paying attention to the fact that the data was collected in December 2016 it is actually quite interesting and shows that Linux' importance in the gaming scene must have grown in some way.  
-On the other hand macOS still seems to be more relevant as there are actually many more games that are compatible with macOS, but not with Linux as can be seen here.
-```sql
-select release, count(release) as num from osNum where mac = 1 and linux = 0 group by release order by release
-```
-  
-|release|num|
-|----|--------|
-|2003|1|
-|2006|8|
-|2007|11|
-|2008|16|
-|2009|45|
-|2010|48|
-|2011|53|
-|2012|74|
-|2013|88|
-|2014|278|
-|2015|452|
-|2016|615|
-|2017|38|
-  
-## Conclusion
-Exploring a different dataset by using the techniques from the premade notebook was a fun experience. Everyone who did not do it missed something. Finding a suitable dataset was not even hard, I just openend the google dataset search and typed "game".
 
 [graph]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/game-compatability.png "graph"
