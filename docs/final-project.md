@@ -196,4 +196,5 @@ He was just as interested in getting my program to run as I was and gave many su
 [oom-pic]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/oom-pic.png "oom-pic"
 [namenode-fs]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/namenode-fs.png "stored-app"
 [yarn-queue]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/yarn-queue.png "yarn queue"
+[final-result]: https://github.com/rubigdata/bigdata-blog-2021-joshdev-de/raw/master/docs/images/final-result.png "yarn queue"
 
