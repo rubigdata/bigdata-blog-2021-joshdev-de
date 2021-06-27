@@ -1,13 +1,13 @@
 # Exploring a web crawl
 In this blog post I will describe how to process web crawl data.  
-I describe the process and problems that occured.
+I describe the process and problems that occurred.
 In the last section I give some ressources which explain the process of getting the scala program to run on a cluster.
 
 ## The question to answer
 Crawl data holds a lot of information, so the choice of a question was not easy.  
 I decided to answer on of the most crucial questions:  
 **Xbox or Playstation?!**  
-In order to answer this question I simply count how often the words xbox and playstation occur in the html pages stored in the web crawl.  
+In order to answer this question I simply count how often the words xbox and playstation occur in the HTML pages stored in the web crawl.  
 Later I also decided to count the amount of webpages each word occurs on.
 
 ## First steps, preparing the data
@@ -44,7 +44,7 @@ val warcs = sc.newAPIHadoopFile(
 
 
 
-For my question I am only interested in the webpages itself so the only thing I care about are responses which hold html files. Another important step is to filter out any invalid entries to not get undefined behaviour. The steps of preparing the data can be seen here:
+For my question I am only interested in the webpages itself so the only thing I care about are responses which hold HTML files. Another important step is to filter out any invalid entries to not get undefined behaviour. The steps of preparing the data can be seen here:
 
 ```scala
 val plainHTML = warcs.map { wr => wr._2}
@@ -55,7 +55,7 @@ val plainHTML = warcs.map { wr => wr._2}
             .map{ _.getHttpStringBody() }
 ```
 
-Now that I have a data frame of plain html pages I can count the words "xbox" and "playstation" easily right?  
+Now that I have a data frame of plain HTML pages I can count the words "xbox" and "playstation" easily right?  
 No it is not easy and you will read why in the following section.
 
 ## Counting words efficiently is hard!
@@ -73,7 +73,7 @@ Using `.r` the string is turned into a regular expression which can then be foun
 val xboxCount = plainHTML.map{ text => "xbox".r.findAllIn(text).size }.sum()
 ```
 But that improvement brings no success and I am greeted with the following log entry again even though special memory settings are applied to give spark more memory space to work with:  
-![oom-pic]
+![oom-pic]  
 The next step is to eliminate the step of parsing the HTML page and work with the plain file:
 ```scala
 val parsed = plainHTML.map{ _.toLowerCase()}
@@ -152,9 +152,9 @@ object RUBigDataApp {
                 .reduce({ case((x1, p1, xo1, po1), (x2, p2, xo2, po2)) => (x1 + x2, p1 + p2, xo1 + xo2, po1 + po2) })
 
     println(s"Count of $word1: \t" + matches._1)
-    println(s"$word1 occured on pages: \t" + matches._3)
+    println(s"$word1 occurs on pages: \t" + matches._3)
     println(s"Count of $word2: \t" + matches._2)
-    println(s"$word2 occured on pages: \t" + matches._4)
+    println(s"$word2 occurs on pages: \t" + matches._4)
 
     sparkSession.stop()
   }
@@ -173,15 +173,22 @@ You then need some spark cluster setup (local or remote) to submit the applicati
 
 ## Final answer
 Just to keep the excitement some more here are some screenshots of my final program running on the cluster.  
-Here you can see how the application itself is held in HDFS
-![namenode-fs]
-Isn't it beautiful? :)
-Here you see it in the queue dashboard:
-![yarn-queue]
+Here you can see how the application itself is held in HDFS.<br><br>
+![namenode-fs]  
+<br>
+**Isn't it beautiful? :)** <br>
+Here you see it in the queue dashboard using the ressources (of course in the gold queue, only the best for my app): <br><br>
+![yarn-queue]  
+<br>
+
+So as you see Xbox is much more popular than Playstation and wins the battle!
+
+One might argue that especially the word "xbox" might occur in HTML source code and that this fact might harm the validity of my result, but I leave this issue to some further investigation by someone else. There is quite a lot of statistical tricks you could apply to squeeze more information out of the word count, but that should be easy to add in the same place as I added the page counter. As soon as the HTML pages are reduced to a tuple of integers processing gets much cheaper.
 
 
 ## Thank you!
-
+A huge thanks goes to my professor Arjen de Vries who unexpectedly matched my working hours at Saturday night.  
+He was just as interested in getting my program to run as I was and gave many suggestions that helped to improve the final program.
 
 
 
