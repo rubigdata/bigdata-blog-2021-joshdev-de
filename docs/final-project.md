@@ -182,7 +182,8 @@ Here you see it in the queue dashboard using the ressources (of course in the go
 <br>
 
 ## Thank you!
-
+A huge thanks goes to my professor Arjen de Vries who unexpectedly matched my working hours at Saturday night.  
+He was just as interested in getting my program to run as I was and gave many suggestions that helped to improve the final program.
 
 
 
