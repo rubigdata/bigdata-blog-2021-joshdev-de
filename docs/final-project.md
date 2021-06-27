@@ -1,8 +1,11 @@
-# Exploring Steam Game Data
-In this blog post I will explore [this](https://data.world/craigkelly/steam-game-data) dataset about steam games.
+# Exploring a web crawl
+In this blog post I will describe how to process web crawl data.  
+I describe the process and problems that occured.
 
 ## The question to answer
-I want to find out whether there is a relation between the release date of a game on Steam and its compatability with different operating systems. The dataset contains the release date and the information whether the game runs on Windows, macOS and Linux. Hence the data is suitable and I can continue.
+Crawl data holds a lot of information, so the choice of a question was not easy.  
+I decided to answer on of the most crucial questions:  
+**Xbox or Playstation?!**
 
 ## Preparing the data
 After importing the CSV file to spark all the fields are strings by default, but I need them to be and an integer for the release year and booleans for the fact whether they are compatible with the operating systems. In order to archive that I use some selfmade conversion functions. Converting strings to booleans is rather easy, but does not happen automatically so the function used for that is:  
